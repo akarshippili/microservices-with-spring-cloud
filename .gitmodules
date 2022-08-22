@@ -1,0 +1,3 @@
+[submodule "currency-exchange-config-repo"]
+	path = currency-exchange-config-repo
+	url = https://github.com/akarshippili/currency-exchange-config-repo.git
