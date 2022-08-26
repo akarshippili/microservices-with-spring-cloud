@@ -1,24 +1,35 @@
 package com.akarsh.microservices.currencyexchangeservice.model;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 
+@Entity
 public class CurrencyExchange {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String from;
-    private String to;
+
+    @Column(name = "SOURCE")
+    private String source;
+
+    @Column(name = "TARGET")
+    private String target;
+
+    @Column(name = "CONVERSION_MULTIPLE")
     private BigDecimal conversionMultiple;
 
+    @Column(name = "ENVIRONMENT")
     private String environment;
 
 
     public CurrencyExchange() {
     }
 
-    public CurrencyExchange(Long id, String from, String to, BigDecimal conversionMultiple, String environment) {
+    public CurrencyExchange(Long id, String source, String target, BigDecimal conversionMultiple, String environment) {
         this.id = id;
-        this.from = from;
-        this.to = to;
+        this.source = source;
+        this.target = target;
         this.conversionMultiple = conversionMultiple;
         this.environment = environment;
     }
@@ -31,20 +42,20 @@ public class CurrencyExchange {
         this.id = id;
     }
 
-    public String getFrom() {
-        return from;
+    public String getSource() {
+        return source;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setSource(String source) {
+        this.source = source;
     }
 
-    public String getTo() {
-        return to;
+    public String getTarget() {
+        return target;
     }
 
-    public void setTo(String to) {
-        this.to = to;
+    public void setTarget(String target) {
+        this.target = target;
     }
 
     public BigDecimal getConversionMultiple() {
@@ -63,8 +74,8 @@ public class CurrencyExchange {
     public String toString() {
         return "CurrencyExchange{" +
                 "id=" + id +
-                ", from='" + from + '\'' +
-                ", to='" + to + '\'' +
+                ", from='" + source + '\'' +
+                ", to='" + target + '\'' +
                 ", conversionMultiple=" + conversionMultiple +
                 ", environment='" + environment + '\'' +
                 '}';
