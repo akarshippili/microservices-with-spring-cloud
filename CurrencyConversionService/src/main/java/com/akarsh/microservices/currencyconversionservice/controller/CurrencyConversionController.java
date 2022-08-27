@@ -49,7 +49,7 @@ public class CurrencyConversionController {
                 quantity,
                 currencyConversion.getConversionMultiple(),
                 quantity.multiply(currencyConversion.getConversionMultiple()),
-                currencyConversion.getEnvironment());
+                currencyConversion.getEnvironment()+ " - " + "rest template");
     }
 
     @GetMapping(path = "v2/from/{from}/to/{to}/quantity/{quantity}")
@@ -58,11 +58,6 @@ public class CurrencyConversionController {
             @PathVariable String to,
             @PathVariable BigDecimal quantity
     ){
-
-        Map<String, String> uriVariables = new HashMap<>();
-        uriVariables.put("from", from);
-        uriVariables.put("to", to);
-
         CurrencyConversion currencyConversion = currencyExchangeProxy.retrieveExchangeValue(from, to);
 
         return new CurrencyConversion(
@@ -72,7 +67,7 @@ public class CurrencyConversionController {
                 quantity,
                 currencyConversion.getConversionMultiple(),
                 quantity.multiply(currencyConversion.getConversionMultiple()),
-                currencyConversion.getEnvironment());
+                currencyConversion.getEnvironment() + " - " + "feign");
     }
 
 }
