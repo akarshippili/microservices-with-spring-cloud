@@ -5,16 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="baab5d92-185a-4f76-ba48-57b5923a71c2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../CurrencyConversionService/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CurrencyConversionService/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CurrencyConversionService/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CurrencyConversionService/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CurrencyConversionService/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CurrencyConversionService/src/main/java/com/akarsh/microservices/currencyconversionservice/CurrencyConversionServiceApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CurrencyConversionService/src/main/java/com/akarsh/microservices/currencyconversionservice/CurrencyExchangeProxy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CurrencyConversionService/src/main/java/com/akarsh/microservices/currencyconversionservice/controller/CurrencyConversionController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CurrencyConversionService/src/main/java/com/akarsh/microservices/currencyconversionservice/model/CurrencyConversion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CurrencyConversionService/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CurrencyConversionService/src/main/java/com/akarsh/microservices/currencyconversionservice/controller/CurrencyConversionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CurrencyConversionService/src/main/java/com/akarsh/microservices/currencyconversionservice/controller/CurrencyConversionController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
