@@ -2,6 +2,9 @@ package com.akarsh.microservices.currencyconversionservice.controller;
 
 import com.akarsh.microservices.currencyconversionservice.CurrencyExchangeProxy;
 import com.akarsh.microservices.currencyconversionservice.model.CurrencyConversion;
+import io.github.resilience4j.retry.annotation.Retry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,13 +24,16 @@ public class CurrencyConversionController {
     @Autowired
     private CurrencyExchangeProxy currencyExchangeProxy;
 
+    private Logger logger = LoggerFactory.getLogger(CurrencyConversionController.class);
     @GetMapping(path = "from/{from}/to/{to}/quantity/{quantity}")
+    @Retry(name = "default")
+//    @Retry(name = "default", fallbackMethod = "hardcodedResponse")
     public CurrencyConversion calculateConversion(
             @PathVariable String from,
             @PathVariable String to,
             @PathVariable BigDecimal quantity
     ){
-
+        logger.info("currency-conversion api call");
         Map<String, String> uriVariables = new HashMap<>();
         uriVariables.put("from", from);
         uriVariables.put("to", to);
@@ -51,6 +57,21 @@ public class CurrencyConversionController {
                 quantity.multiply(currencyConversion.getConversionMultiple()),
                 currencyConversion.getEnvironment()+ " - " + "rest template");
     }
+
+    public CurrencyConversion hardcodedResponse(String from,
+                                    String to,
+                                    BigDecimal quantity,
+                                    Throwable ex){
+        return new CurrencyConversion(
+                0l,
+                from,
+                to,
+                quantity,
+                BigDecimal.ZERO,
+                BigDecimal.ZERO,
+                "fallback");
+    }
+
 
     @GetMapping(path = "v2/from/{from}/to/{to}/quantity/{quantity}")
     public CurrencyConversion calculateConversionFeign(
