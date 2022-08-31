@@ -2,6 +2,7 @@ package com.akarsh.microservices.currencyconversionservice.controller;
 
 import com.akarsh.microservices.currencyconversionservice.CurrencyExchangeProxy;
 import com.akarsh.microservices.currencyconversionservice.model.CurrencyConversion;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,8 +27,9 @@ public class CurrencyConversionController {
 
     private Logger logger = LoggerFactory.getLogger(CurrencyConversionController.class);
     @GetMapping(path = "from/{from}/to/{to}/quantity/{quantity}")
-    @Retry(name = "default")
+//    @Retry(name = "currency-conversion-v1")
 //    @Retry(name = "default", fallbackMethod = "hardcodedResponse")
+    @CircuitBreaker(name = "default", fallbackMethod = "hardcodedResponse")
     public CurrencyConversion calculateConversion(
             @PathVariable String from,
             @PathVariable String to,
