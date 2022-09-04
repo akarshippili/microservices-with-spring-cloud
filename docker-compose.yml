@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+
+  mysql-development:
+    image: mysql:8.0.30
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: CurrencyExchangeDB
+      MYSQL_USER: aku
+      MYSQL_PASSWORD: aku
+    networks:
+      - currency-network
+
+  currency-exchange:
+    image: akarshippili/currencyexchangeservice:1.0-SNAPSHOT
+    mem_limit: 700m
+    ports:
+      - "8000:8000"
+    networks:
+      - currency-network
+    environment:
+      - spring.datasource.url=jdbc:mysql://mysql-development:3306/CurrencyExchangeDB
+    depends_on:
+      - mysql-development
+  
+networks:
+  currency-network:
