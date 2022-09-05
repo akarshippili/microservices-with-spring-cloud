@@ -9,6 +9,18 @@ services:
       MYSQL_DATABASE: CurrencyExchangeDB
       MYSQL_USER: aku
       MYSQL_PASSWORD: aku
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    networks:
+      - currency-network
+
+  naming-server:
+    image: akarshippili/namingserver:1.0-SNAPSHOT
+    mem_limit: 700m
+    ports:
+      - "8761:8761"
     networks:
       - currency-network
 
@@ -20,9 +32,14 @@ services:
     networks:
       - currency-network
     environment:
-      - spring.datasource.url=jdbc:mysql://mysql-development:3306/CurrencyExchangeDB
+      SPRING.DATASOURCE.URL: jdbc:mysql://mysql-development:3306/CurrencyExchangeDB
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
     depends_on:
-      - mysql-development
+      mysql-development:
+          condition: service_healthy
+      naming-server:
+          condition: service_started
+      
   
 networks:
   currency-network:
