@@ -7,6 +7,7 @@ import io.github.resilience4j.retry.annotation.Retry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,10 @@ public class CurrencyConversionController {
     private CurrencyExchangeProxy currencyExchangeProxy;
 
     private Logger logger = LoggerFactory.getLogger(CurrencyConversionController.class);
+
+    @Value("${currency-exchange.uri}")
+    private String url;
+
     @GetMapping(path = "from/{from}/to/{to}/quantity/{quantity}")
 //    @Retry(name = "currency-conversion-v1")
 //    @Retry(name = "default", fallbackMethod = "hardcodedResponse")
@@ -42,7 +47,7 @@ public class CurrencyConversionController {
 
         ResponseEntity<CurrencyConversion> response = new RestTemplate()
                 .getForEntity(
-                        "http://localhost:8000/currency-exchange/from/{from}/to/{to}",
+                        url,
                         CurrencyConversion.class,
                         uriVariables
                 );
