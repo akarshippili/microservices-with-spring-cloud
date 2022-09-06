@@ -39,7 +39,27 @@ services:
           condition: service_healthy
       naming-server:
           condition: service_started
-      
+  
+  currency-conversion:
+    image: akarshippili/currencyconversionservice:1.0-SNAPSHOT
+    mem_limit: 700m
+    ports:
+      - "8100:8100"
+    networks:
+      - currency-network
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      currency-exchange.uri: http://currency-exchange:8000/currency-exchange/from/{from}/to/{to}
+  
+  apigateway:
+    image: akarshippili/apigateway:1.0-SNAPSHOT
+    mem_limit: 700m
+    ports:
+      - "8765:8765"
+    networks:
+      - currency-network
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
   
 networks:
   currency-network:
