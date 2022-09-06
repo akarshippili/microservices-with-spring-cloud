@@ -34,22 +34,34 @@ services:
     environment:
       SPRING.DATASOURCE.URL: jdbc:mysql://mysql-development:3306/CurrencyExchangeDB
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      spring.zipkin.baseUrl: http://zipkin-server:9411/
+      # RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      # SPRING_RABBITMQ_HOST: rabbitmq
+      # SPRING_ZIPKIN_SENDER_TYPE: rabbit
     depends_on:
       mysql-development:
           condition: service_healthy
       naming-server:
           condition: service_started
+      # rabbitmq:
+      #     condition: service_started
   
   currency-conversion:
     image: akarshippili/currencyconversionservice:1.0-SNAPSHOT
     mem_limit: 700m
     ports:
       - "8100:8100"
+    # depends_on:
+    #   - rabbitmq
     networks:
       - currency-network
     environment:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
       currency-exchange.uri: http://currency-exchange:8000/currency-exchange/from/{from}/to/{to}
+      spring.zipkin.baseUrl: http://zipkin-server:9411/
+      # RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      # SPRING_RABBITMQ_HOST: rabbitmq
+      # SPRING_ZIPKIN_SENDER_TYPE: rabbit
   
   apigateway:
     image: akarshippili/apigateway:1.0-SNAPSHOT
@@ -58,8 +70,38 @@ services:
       - "8765:8765"
     networks:
       - currency-network
+    # depends_on:
+    #   - rabbitmq
     environment:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      spring.zipkin.baseUrl: http://zipkin-server:9411/
+      # RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      # SPRING_RABBITMQ_HOST: rabbitmq
+      # SPRING_ZIPKIN_SENDER_TYPE: rabbit
   
+  zipkin-server:
+    image: openzipkin/zipkin:2.23
+    mem_limit: 700m
+    ports:
+      - "9411:9411"
+    networks:
+      - currency-network
+    # environment:
+    #   RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+    # depends_on:
+    #   - rabbitmq
+    # restart: always 
+
+  
+  # rabbitmq:
+  #   image: rabbitmq:3.8.12-management
+  #   mem_limit: 300m
+  #   ports:
+  #     - "5672:5672"
+  #     - "15672:15672"
+  #   networks:
+  #     - currency-network
+
+
 networks:
   currency-network:
