@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="baab5d92-185a-4f76-ba48-57b5923a71c2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../ApiGateWay/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CurrencyConversionService/src/main/java/com/akarsh/microservices/currencyconversionservice/CurrencyExchangeProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CurrencyConversionService/src/main/java/com/akarsh/microservices/currencyconversionservice/CurrencyExchangeProxy.java" afterDir="false" />
-    </list>
+    <list default="true" id="baab5d92-185a-4f76-ba48-57b5923a71c2" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,17 +66,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "show.migrate.to.gradle.popup": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.akarsh.microservices.currencyexchangeservice.model" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunManager" selected="Gradle.CurrencyExchangeService [bootRun]">
