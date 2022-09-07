@@ -17,7 +17,7 @@ services:
       - currency-network
 
   naming-server:
-    image: akarshippili/namingserver:1.0-SNAPSHOT
+    image: akarshippili/currencyexchange-namingserver:1.0-SNAPSHOT
     mem_limit: 700m
     ports:
       - "8761:8761"
@@ -64,7 +64,7 @@ services:
       # SPRING_ZIPKIN_SENDER_TYPE: rabbit
   
   apigateway:
-    image: akarshippili/apigateway:1.0-SNAPSHOT
+    image: akarshippili/currencyexchange-apigateway:1.0-SNAPSHOT
     mem_limit: 700m
     ports:
       - "8765:8765"
